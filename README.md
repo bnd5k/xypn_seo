@@ -10,8 +10,9 @@ Two approaches I can think of:
 1) *Catching the AJAX call/JSON response*
 * The call to load advisor content is a POST request to 'http://www.xyplanningnetwork.com/wp-admin/admin-ajax.php' using the js file `/wp-content/plugins/ajax-advisor-search/assets/js/ajax-advisor-search.js?ver=1.0`
 * The Rails open-uri module cannot make POST calls, therefore grabbing the XHR/JSON response might be difficult
-* Still might be able to figure out this way if we can make/stub that call and get the response with just financial advisor
+* Still might be able to figure out this way if we can make/stub that POST call and get the response with just financial advisor
   - `rest-open-uri` gem can make POST requests?
+  - Does it need any specific params?
 
 2) **Current implementation (a bit of a pain)** *Use a webdriver to actually fire up a browser and wait for AJAX*
 
