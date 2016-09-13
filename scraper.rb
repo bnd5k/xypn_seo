@@ -17,38 +17,64 @@ module HTMLCleaner
   end
 end
 
-class PageParser
-  attr_reader :noko_doc
-
+class XYPNParser
   def initialize(html_string)
     @noko_doc = create_nokogiri_doc(html_string)
   end
 
-  # returns an array of all XYPN advisor profile URLs
   def parse_advisor_list
-    parse_urls
+    parse_profile_urls
   end
 
-  # currently just returns a specific advisors personal URL
-  def parse_advisor_page
-    parse_page
+  def parse_advisor
+    parse_advisor_page
   end
 
   private
+
+  attr_reader :noko_doc
 
   def create_nokogiri_doc(html_string)
     clean_html = HTMLCleaner.clean(html_string)
     Nokogiri::HTML(clean_html)
   end
 
-  def parse_urls
+  def parse_profile_urls
     @noko_doc.xpath('//h3/a/@href').map do | noko_el |
       noko_el.value
     end
   end
 
-  def parse_page
-    @noko_doc.xpath('//p[@class="advisor-website"]/a/@href').first.value
+  def parse_advisor_page
+    { 
+      name: grab_advisor_name,
+      business: grab_business_name,
+      url: grab_business_site
+    }
+  end
+
+  def grab_advisor_name
+    if @noko_doc.xpath('//h1').children.first.text.nil?
+      "UNKNOWN"
+    else
+      @noko_doc.xpath('//h1').children.first.text.strip
+    end
+  end
+
+  def grab_business_name
+    if @noko_doc.xpath('//h1').children.last.text.nil?
+      "UNKNOWN"
+    else
+      @noko_doc.xpath('//h1').children.last.text
+    end
+  end
+
+  def grab_business_site
+    if @noko_doc.xpath('//p[@class="advisor-website"]/a/@href').first.nil?
+      "UNKNOWN"
+    else
+      @noko_doc.xpath('//p[@class="advisor-website"]/a/@href').first.value
+    end
   end
 end
 
@@ -57,20 +83,20 @@ end
 
 response = RestClient.post 'http://www.xyplanningnetwork.com/wp-admin/admin-ajax.php', {action: 'do_ajax_advisor_search', page: '1', amountPerPage: '10', filterCriteria: 'fee-structure', filterValue: 'all' }
 
-parsed_page = PageParser.new(response.body)
+parsed_page = XYPNParser.new(response.body)
 
 all_XYPN_advisor_urls = parsed_page.parse_advisor_list
 
 # Next, iterate over each page to grab whatever info needed
 # Just doing the first three of the array to not go crazy with the requests
 
-advisor_urls = []
+advisors = []
 
-all_XYPN_advisor_urls[0..2].each do | xypn_url |
+all_XYPN_advisor_urls.each do | xypn_url |
   response = RestClient.get(xypn_url)
-  parsed_page = PageParser.new(response.body)
-  advisor_urls << { "#{xypn_url}" => parsed_page.parse_advisor_page }
+  parsed_page = XYPNParser.new(response.body)
+  advisor = parsed_page.parse_advisor
+  advisor[:xypn_profile] = xypn_url
+  puts advisor
+  advisors << advisor
 end
-
-puts advisor_urls
-
