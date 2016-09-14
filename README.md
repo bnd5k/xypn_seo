@@ -7,7 +7,8 @@ This Rails app evaluates the financial advisors listed at [http://www.xyplanning
 ## In Progress
 
 Next steps:
-> Ask Ben for some guidance on smart/conventional architecture for the functionality of the app.
+> * Finalize the API logic (getting what is needed from PageSpeed Insights)
+> * Ask Ben for some guidance on smart/conventional architecture for the functionality of the app.
 
 Pertinent notes:
 >* An array of all current advisors (09/13/16) lives in /lib/advisors.rb
