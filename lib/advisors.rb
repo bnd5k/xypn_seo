@@ -1,4 +1,4 @@
-# All XYPN listed advisors as of 09-13-2016
+# All XYPN listed advisors as of 09-13-2016 (125 total, 3 without business URLs)
 
 advisors = [
   {
