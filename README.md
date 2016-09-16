@@ -11,8 +11,8 @@ Next steps:
 > * Ask Ben for some guidance on smart/conventional architecture for the functionality of the app.
 
 Pertinent notes:
->* An array of all current advisors (09/13/16) lives in /lib/advisors.rb
->* All current request, scraping, and evalution logic lives in /lib/scraper.rb.
+>* An array of all current advisors (09/13/16) lives in /lib/xypn_seo/advisors.rb
+>* All current request, scraping, and evalution logic lives in /lib/xypn_seo/web_scraper/scraper.rb.
 
 ---
 
@@ -28,7 +28,7 @@ The [page listing all advisors](http://www.xyplanningnetwork.com/consumer/find-a
 
 The app utilizes the Google PageSpeed Insights API to evaluate the overall performance individual advisor's business site. (It also goes so far as to offer suggestions for improvement, but the current scope of this app will not be taking advantage of that functionality?)  
 
-API gets hit with `"https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=http://advisor_site_url/&key=#{ENV['PAGESPEED_KEY']}"` (note the variable params for 'url' and 'key'). Scores are scraped and persisted to the database.  
+API gets hit with `"https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=#{advisor_site_url}/&key=#{ENV['PAGESPEED_KEY']}"` (note the variable params for 'url' and 'key'). Scores are scraped and persisted to the database.  
 
 ---
 

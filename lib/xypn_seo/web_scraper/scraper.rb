@@ -1,23 +1,9 @@
 require 'nokogiri'
 require 'rest-client'
 
-module HTMLCleaner
-  def self.clean(html_string)
-    clean_string = remove_any_white_space_between_tags(condense_whitespace(html_string)).strip
-  end
+class Scraper
+  extend HTMLCleaner
 
-  private
-
-  def self.remove_any_white_space_between_tags(html_string)
-    html_string.gsub(/(?<=>)\s+(?=<)/, "")
-  end
-
-  def self.condense_whitespace(html_string)
-    html_string.gsub(/\s+/, ' ')
-  end
-end
-
-class XYPNParser
   def initialize(html_string)
     @noko_doc = create_nokogiri_doc(html_string)
   end
@@ -83,7 +69,7 @@ end
 
 response = RestClient.post 'http://www.xyplanningnetwork.com/wp-admin/admin-ajax.php', {action: 'do_ajax_advisor_search', page: '1', amountPerPage: '10', filterCriteria: 'fee-structure', filterValue: 'all' }
 
-parsed_page = XYPNParser.new(response.body)
+parsed_page = Scraper.new(response.body)
 
 all_XYPN_advisor_urls = parsed_page.parse_advisor_list
 
@@ -94,7 +80,7 @@ advisors = []
 
 all_XYPN_advisor_urls.each do | xypn_url |
   response = RestClient.get(xypn_url)
-  parsed_page = XYPNParser.new(response.body)
+  parsed_page = Scraper.new(response.body)
   advisor = parsed_page.parse_advisor
   advisor[:xypn_profile] = xypn_url
   puts advisor
