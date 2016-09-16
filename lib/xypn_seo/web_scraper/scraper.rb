@@ -1,19 +1,19 @@
 require 'nokogiri'
 require 'rest-client'
 
-class Scraper
+class XYPNScraper
   extend HTMLCleaner
 
   def initialize(html_string)
     @noko_doc = create_nokogiri_doc(html_string)
   end
 
-  def parse_advisor_list
-    parse_profile_urls
+  def scrape_advisor_list
+    scrape_profile_urls # array of all XPYN profile URLs
   end
 
-  def parse_advisor
-    parse_advisor_page
+  def scrape_advisor
+    scrape_profile # hash of profile scrape
   end
 
   private
@@ -25,21 +25,21 @@ class Scraper
     Nokogiri::HTML(clean_html)
   end
 
-  def parse_profile_urls
+  def scrape_profile_urls
     @noko_doc.xpath('//h3/a/@href').map do | noko_el |
       noko_el.value
     end
   end
 
-  def parse_advisor_page
+  def scrape_profile
     { 
-      name: grab_advisor_name,
-      business: grab_business_name,
-      url: grab_business_site
+      name:     parse_advisor_name,
+      business: parse_business_name,
+      url:      parse_business_site
     }
   end
 
-  def grab_advisor_name
+  def parse_advisor_name
     if @noko_doc.xpath('//h1').children.first.text.nil?
       "UNKNOWN"
     else
@@ -47,7 +47,7 @@ class Scraper
     end
   end
 
-  def grab_business_name
+  def parse_business_name
     if @noko_doc.xpath('//h1').children.last.text.nil?
       "UNKNOWN"
     else
@@ -55,7 +55,7 @@ class Scraper
     end
   end
 
-  def grab_business_site
+  def parse_business_site
     if @noko_doc.xpath('//p[@class="advisor-website"]/a/@href').first.nil?
       "UNKNOWN"
     else
