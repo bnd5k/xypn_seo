@@ -1,8 +1,28 @@
 <%= content_tag :div, class: "container" do %>
-<%= content_tag :div, class: "row" do %>
-<%= content_tag :div, (content_tag :h1, "XYPN Scraper"), class: "col-sm-12 text-center" %>
 
+  <%= content_tag :div, class: "row" do %>
 
+    <%= content_tag :div, (content_tag :h1, "XYPN Scraper"), class: "col-sm-12 text-center" %>
 
-<% end %>
+  <% end %>
+
+  <%= content_tag :div, class: "row" do %>
+    <%= content_tag :div, class: "col-sm-12 text-center" do %>
+
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Website</th>
+          <th>Owner</th>
+          <th>Desktop Score</th>
+          <th>Mobile Score</th>
+        </tr>
+
+        <!-- <%= @websites %> -->
+
+      </table>
+
+    <% end %>
+  <% end %>
+
 <% end %>
