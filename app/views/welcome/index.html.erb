@@ -18,7 +18,15 @@
           <th>Mobile Score</th>
         </tr>
 
-        <!-- <%= @websites %> -->
+        <%= @websites.each do |website| %>
+          <tr>
+            <td><%= website.id %></td>
+            <td><%= website.id %></td>
+            <td><%= website.id %></td>
+            <td><%= website.id %></td>
+            <td><%= website.id %></td>
+          </tr>
+        <% end %>
 
       </table>
 

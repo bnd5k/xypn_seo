@@ -14,18 +14,3 @@
  *= require_self
  *= require bootstrap.min
  */
-
-/*table {
-  border: 1px solid black;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-th {
-  border: 1px solid red;
-  margin: 3px;
-}
-
-td {
-  border: 1px solid blue;
-}*/
