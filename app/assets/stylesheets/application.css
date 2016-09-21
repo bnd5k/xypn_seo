@@ -14,3 +14,15 @@
  *= require_self
  *= require bootstrap.min
  */
+
+.asc-order {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #888888;
+}
+
+.desc-order {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #888888;
+}

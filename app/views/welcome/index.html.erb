@@ -17,8 +17,16 @@
           <th>Business</th>
           <th>XYPN Profile</th>
           <th>Website</th>
-          <th>Desktop Score</th>
-          <th>Mobile Score</th>
+          <th>
+            Desktop
+            <a href="/?sort=desktop_asc" class="asc-order"></a>
+            <a href="/?sort=desktop_desc" class="desc-order"></a>
+          </th>
+          <th>
+            Mobile
+            <a href="/?sort=desktop_asc" class="asc-order"></a>
+            <a href="/?sort=desktop_desc" class="desc-order"></a>
+          </th>
         </tr>
 
         <% @websites.each do | website | %>
