@@ -1,5 +1,17 @@
 # All XYPN listed advisors as of 09-13-2016 (125 total, 3 without business URLs)
 
+Website.all.each do | website |
+  p website.url
+  website.desktop_score = SiteEval.overall_score(website.url, "desktop")
+  website.mobile_score = SiteEval.overall_score(website.url, "mobile")
+  p website.desktop_score
+  p website.mobile_score
+  website.save!
+end
+
+load "./lib/xypn_seo/seo_evaluation/evaluation.rb"
+
+
 ADVISORS = [
   {
     :advisor => "Inga Chira, CFP®, Ph.D.",
