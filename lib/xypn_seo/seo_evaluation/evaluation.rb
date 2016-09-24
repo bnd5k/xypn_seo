@@ -1,11 +1,27 @@
 require 'rest-client'
 require 'json'
 
-module SiteEval
+class SiteEval
 
-  def self.overall_score(url, strategy)
+  def call
+    evaluate_all_websites
+  end
+
+  private
+
+  def evaluate_all_websites
+    Website.all.each do | website |
+      puts "Evaluating #{website.url}"
+      website[:desktop_score] = overall_score(website.url, "desktop")
+      website[:mobile_score] = overall_score(website.url, "mobile")
+      website.save!
+    end
+  end
+
+  def overall_score(url, strategy)
     begin
-      response = RestClient.get("https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=#{url}&key=#{ENV['PAGESPEED_KEY']}&prettyprint=false&strategy=#{strategy}")
+      url = "https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=#{url}&key=#{ENV['PAGESPEED_KEY']}&prettyprint=false&strategy=#{strategy}"
+      response = RestClient.get url
     rescue RestClient::BadRequest
       0
     else
@@ -15,16 +31,3 @@ module SiteEval
   end
 
 end
-
-Website.all.each do | website |
-  p website.url
-  website.desktop_score = SiteEval.overall_score(website.url, "desktop")
-  website.mobile_score = SiteEval.overall_score(website.url, "mobile")
-  p website.desktop_score
-  p website.mobile_score
-  website.save!
-end
-
-load "./lib/xypn_seo/seo_evaluation/evaluation.rb"
-
-

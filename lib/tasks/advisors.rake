@@ -13,7 +13,7 @@ namespace :advisors do
   desc "Run PageSpeed Insights on advisor websites"
   task evaluate: :environment do
 
-
+    SiteEval.new.call
 
   end
 

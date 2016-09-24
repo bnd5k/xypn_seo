@@ -2,6 +2,7 @@ require 'nokogiri'
 require_relative './html_cleaner'
 
 module AdvisorList
+  
   extend HTMLCleaner
 
   def self.parse(html_string)

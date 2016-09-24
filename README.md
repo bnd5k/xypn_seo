@@ -19,9 +19,9 @@ In order to update the list of advisors and their websites:
 
 ## Site Evalution
 
-The app utilizes the Google PageSpeed Insights API to evaluate the overall performance individual advisor's business site.
+The app utilizes the Google PageSpeed Insights API to evaluate the overall performance of each advisor's business site.
 
-The API gets hit with `"https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=#{advisor_site_url}/&key=#{ENV['PAGESPEED_KEY']}"` (note the variable params for 'url' and 'key'). Scores are scraped and persisted to the database.  
+The API gets hit with `"https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=#{url}&key=#{ENV['PAGESPEED_KEY']}&prettyprint=false&strategy=#{strategy}"` (note the variable params for 'url', 'key', and 'strategy'). Desktop and mobile scores are returned and persisted to the database.  
 
 `$ bundle exec rake advisors:evaluate`  
 
@@ -29,7 +29,7 @@ The API gets hit with `"https://www.googleapis.com/pagespeedonline/v1/runPagespe
 
 ## Local Configuration
 
-In order for the API to work in development, you must [generate a Google API key](https://console.developers.google.com/apis/credentials?project=xypn-scraper). This app utilizes the 'dotenv-rails' gem to store key securely on your local environment. It requires that you create a `.env` file in the root of the app, and store the key as `PAGESPEED_KEY=<yourkeyhere>`.
+In order for the API to work in development, you must [generate a Google API key](https://console.developers.google.com/apis/credentials?project=xypn-scraper). This app utilizes the 'dotenv-rails' gem to store the key securely in your local environment, which requires you to create a `.env` file in the root of the app, and store the key as `PAGESPEED_KEY=<yourkeyhere>`.
 
 ---
 

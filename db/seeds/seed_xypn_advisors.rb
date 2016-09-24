@@ -1,8 +1,10 @@
 require 'rest-client'
 require './lib/xypn_seo/xypn_scraper/advisor_list'
 require './lib/xypn_seo/xypn_scraper/advisor_page'
+require './lib/xypn_seo/seo_evaluation/evaluation'
 
 class SeedXYPNAdvisors
+
   def call
     url = 'http://www.xyplanningnetwork.com/wp-admin/admin-ajax.php'
     form_fields = {
@@ -42,4 +44,5 @@ class SeedXYPNAdvisors
       website.save!
     end
   end
+  
 end
