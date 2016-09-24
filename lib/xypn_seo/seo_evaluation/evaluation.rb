@@ -16,3 +16,15 @@ module SiteEval
 
 end
 
+Website.all.each do | website |
+  p website.url
+  website.desktop_score = SiteEval.overall_score(website.url, "desktop")
+  website.mobile_score = SiteEval.overall_score(website.url, "mobile")
+  p website.desktop_score
+  p website.mobile_score
+  website.save!
+end
+
+load "./lib/xypn_seo/seo_evaluation/evaluation.rb"
+
+

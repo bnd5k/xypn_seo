@@ -2,17 +2,6 @@
 
 This Rails app evaluates the financial advisors listed at [http://www.xyplanningnetwork.com/consumer/find-advisor/](http://www.xyplanningnetwork.com/consumer/find-advisor/). 
 
---- 
-
-## In Progress
-
-Next steps:
-> * Finalize the API logic (getting what is needed from PageSpeed Insights)
-> * Ask Ben for some guidance on smart/conventional architecture for the functionality of the app.
-
-Pertinent notes:
->* An array of all current advisors (09/13/16) lives in /lib/xypn_seo/advisors.rb
->* All current request, scraping, and evalution logic lives in /lib/xypn_seo/web_scraper/scraper.rb.
 
 ---
 
@@ -22,6 +11,8 @@ This app first scrapes content from the HTML documents listing all XYPN advisors
 
 The [page listing all advisors](http://www.xyplanningnetwork.com/consumer/find-advisor/) displays advisor content after making an AJAX POST request, which the app uses to collect each advisor's [XYPN profile page](http://www.xyplanningnetwork.com/advisors/paul-v-sydlansky-mba-cfp/) URL. The app then iterates over the list of individual profile URLs, making a request on each, and scraping data (notably their personal/business site).  
 
+`bundle exec rake advisors:seed`  
+
 ---
 
 ## Site Evalution
@@ -29,6 +20,8 @@ The [page listing all advisors](http://www.xyplanningnetwork.com/consumer/find-a
 The app utilizes the Google PageSpeed Insights API to evaluate the overall performance individual advisor's business site. (It also goes so far as to offer suggestions for improvement, but the current scope of this app will not be taking advantage of that functionality?)  
 
 API gets hit with `"https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=#{advisor_site_url}/&key=#{ENV['PAGESPEED_KEY']}"` (note the variable params for 'url' and 'key'). Scores are scraped and persisted to the database.  
+
+`bundle exec rake advisors:evaluate`  
 
 ---
 

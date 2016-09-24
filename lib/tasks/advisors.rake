@@ -1,11 +1,17 @@
 namespace :advisors do
 
   desc "Update list of XYPN advisors"
-  task update_list: :environment do
+  task seed: :environment do
+
+    SeedXYPNAdvisors.call
+
   end
 
   desc "Run PageSpeed Insights on advisor websites"
-  task evaluate_sites: :environment do
+  task evaluate: :environment do
+
+    
+      
   end
 
 end
