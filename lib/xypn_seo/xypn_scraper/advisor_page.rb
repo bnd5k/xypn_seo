@@ -1,7 +1,7 @@
 require 'nokogiri'
+require_relative './html_cleaner'
 
-class AdvisorPage
-  extend HTMLCleaner
+module AdvisorPage
 
   def self.parse(html_string, xypn_url)
     create_nokogiri_doc(html_string)
@@ -17,33 +17,24 @@ class AdvisorPage
 
   attr_reader :noko_doc
 
-  def create_nokogiri_doc(html_string)
+  def self.create_nokogiri_doc(html_string)
     clean_html = HTMLCleaner.clean(html_string)
     @noko_doc = Nokogiri::HTML(clean_html)
   end
 
-  def parse_advisor_name
-    if @noko_doc.xpath('//h1').children.first.text.nil?
-      "UNKNOWN"
-    else
-      @noko_doc.xpath('//h1').children.first.text.strip
-    end
+  def self.parse_advisor_name
+    @noko_doc.xpath('//h1').children.first.text.strip
   end
 
-  def parse_business_name
-    if @noko_doc.xpath('//h1').children.last.text.nil?
-      "UNKNOWN"
-    else
-      @noko_doc.xpath('//h1').children.last.text
-    end
+  def self.parse_business_name
+    @noko_doc.xpath('//h1').children.last.text
   end
 
-  def parse_business_site
+  def self.parse_business_site
     if @noko_doc.xpath('//p[@class="advisor-website"]/a/@href').first.nil?
       "UNKNOWN"
     else
       @noko_doc.xpath('//p[@class="advisor-website"]/a/@href').first.value
     end
   end
-
 end

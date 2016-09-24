@@ -1,6 +1,7 @@
 require 'nokogiri'
+require_relative './html_cleaner'
 
-class AdvisorList
+module AdvisorList
   extend HTMLCleaner
 
   def self.parse(html_string)
@@ -9,17 +10,16 @@ class AdvisorList
 
   private
 
-  def scrape_profile_urls
+  def self.scrape_profile_urls(html_string)
     noko_doc = create_nokogiri_doc(html_string)
     noko_doc.xpath('//h3/a/@href').map do | noko_element_advisor_url |
       noko_element_advisor_url.value
     end
   end
 
-  def create_nokogiri_doc(html_string)
+  def self.create_nokogiri_doc(html_string)
     clean_html = HTMLCleaner.clean(html_string)
     Nokogiri::HTML(clean_html)
   end
 
 end
-

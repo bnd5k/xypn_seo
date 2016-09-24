@@ -11,17 +11,19 @@ This app first scrapes content from the HTML documents listing all XYPN advisors
 
 The [page listing all advisors](http://www.xyplanningnetwork.com/consumer/find-advisor/) displays advisor content after making an AJAX POST request, which the app uses to collect each advisor's [XYPN profile page](http://www.xyplanningnetwork.com/advisors/paul-v-sydlansky-mba-cfp/) URL. The app then iterates over the list of individual profile URLs, making a request on each, and scraping data (notably their personal/business site).  
 
-`bundle exec rake advisors:seed`  
+In order to update the list of advisors and their websites: 
+
+`$ bundle exec rake advisors:seed`  
 
 ---
 
 ## Site Evalution
 
-The app utilizes the Google PageSpeed Insights API to evaluate the overall performance individual advisor's business site. (It also goes so far as to offer suggestions for improvement, but the current scope of this app will not be taking advantage of that functionality?)  
+The app utilizes the Google PageSpeed Insights API to evaluate the overall performance individual advisor's business site.
 
-API gets hit with `"https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=#{advisor_site_url}/&key=#{ENV['PAGESPEED_KEY']}"` (note the variable params for 'url' and 'key'). Scores are scraped and persisted to the database.  
+The API gets hit with `"https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=#{advisor_site_url}/&key=#{ENV['PAGESPEED_KEY']}"` (note the variable params for 'url' and 'key'). Scores are scraped and persisted to the database.  
 
-`bundle exec rake advisors:evaluate`  
+`$ bundle exec rake advisors:evaluate`  
 
 ---
 
