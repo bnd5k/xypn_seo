@@ -1,7 +1,6 @@
 require 'rest-client'
-require 'json'
 
-class SiteEval
+class AdvisorSiteEvaluation
 
   def call
     evaluate_all_websites
