@@ -5,7 +5,7 @@ namespace :advisors do
   desc "Update list of XYPN advisors"
   task scrape: :environment do
 
-    SeedXYPNAdvisors.new.call
+    FindOrCreateXYPNAdvisors.new.call
     puts "#{Website.all.count} advisor websites saved to the database."
 
   end
