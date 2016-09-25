@@ -1,7 +1,7 @@
 require 'nokogiri'
-require_relative './html_cleaner'
+require_relative 'html_cleaner'
 
-module AdvisorPage
+module ScrapeAdvisorProfilePage
 
   def self.parse(html_string, xypn_url)
     create_nokogiri_doc(html_string)
@@ -15,26 +15,26 @@ module AdvisorPage
 
   private
 
-  attr_reader :noko_doc
+  attr_reader :nokogiri_object
 
-  def self.create_nokogiri_doc(html_string)
+  def self.create_nokogiri_object(html_string)
     clean_html = HTMLCleaner.clean(html_string)
-    @noko_doc = Nokogiri::HTML(clean_html)
+    @nokogiri_object = Nokogiri::HTML(clean_html)
   end
 
   def self.parse_advisor_name
-    @noko_doc.xpath('//h1').children.first.text.strip
+    @nokogiri_object.xpath('//h1').children.first.text.strip
   end
 
   def self.parse_business_name
-    @noko_doc.xpath('//h1').children.last.text
+    @nokogiri_object.xpath('//h1').children.last.text
   end
 
   def self.parse_business_site
-    if @noko_doc.xpath('//p[@class="advisor-website"]/a/@href').first.nil?
+    if @nokogiri_object.xpath('//p[@class="advisor-website"]/a/@href').first.nil?
       "UNKNOWN"
     else
-      @noko_doc.xpath('//p[@class="advisor-website"]/a/@href').first.value
+      @nokogiri_object.xpath('//p[@class="advisor-website"]/a/@href').first.value
     end
   end
   

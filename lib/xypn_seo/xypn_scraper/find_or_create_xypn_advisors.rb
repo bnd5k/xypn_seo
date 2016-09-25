@@ -1,7 +1,6 @@
 require 'rest-client'
-require '/xypn_seo/xypn_scraper/advisor_list'
-require '/xypn_seo/xypn_scraper/advisor_page'
-require '/xypn_seo/seo_evaluation/evaluation'
+require_relative 'scrape_advisor_profile_page'
+require_relative 'scrape_list_of_advisors'
 
 class FindOrCreateXYPNAdvisors
 
@@ -25,7 +24,7 @@ class FindOrCreateXYPNAdvisors
   end
 
   def parse_advisors(html_string)
-    advisor_url_array = AdvisorList.parse(html_string)
+    advisor_url_array = ScrapeListOfAdvisors.parse(html_string)
     all_advisors = parse_individual_advisor_pages(advisor_url_array)
     persist_advisors(all_advisors)
   end
@@ -33,7 +32,7 @@ class FindOrCreateXYPNAdvisors
   def parse_individual_advisor_pages(url_array)
     url_array.map do |xypn_url|
       response = RestClient.get(xypn_url)
-      advisor_info_hash = AdvisorPage.parse(response.body, xypn_url)
+      advisor_info_hash = ScrapeAdvisorProfilePage.parse(response.body, xypn_url)
       advisor_info_hash
     end
   end
