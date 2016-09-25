@@ -2,7 +2,7 @@ require 'rest-client'
 require_relative 'scrape_advisor_profile_page'
 require_relative 'scrape_list_of_advisors'
 
-class FindOrCreateXYPNAdvisors
+class FindOrCreateAdvisorWebsite
 
   def call
     response = RestClient.post xypn_url, form_fields
