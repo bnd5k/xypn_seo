@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv.load(File.expand_path("/.env", __FILE__))
+Dotenv.load(File.expand_path("/.env", __FILE__)) if File.exist?(File.expand_path("/.env", __FILE__))
 
 module XypnSeo
   class Application < Rails::Application

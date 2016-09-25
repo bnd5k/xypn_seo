@@ -3,7 +3,7 @@ require "./db/seeds/seed_xypn_advisors"
 namespace :advisors do
 
   desc "Update list of XYPN advisors"
-  task seed: :environment do
+  task scrape: :environment do
 
     SeedXYPNAdvisors.new.call
     puts "#{Website.all.count} advisor websites saved to the database."
