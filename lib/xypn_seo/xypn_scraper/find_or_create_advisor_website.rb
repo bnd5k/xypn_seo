@@ -11,7 +11,7 @@ class FindOrCreateAdvisorWebsite
 
   private
 
-  def xpyn_url
+  def xypn_url
     'http://www.xyplanningnetwork.com/wp-admin/admin-ajax.php'
   end
 

@@ -4,7 +4,7 @@ require_relative 'html_cleaner'
 module ScrapeAdvisorProfilePage
 
   def self.parse(html_string, xypn_url)
-    create_nokogiri_doc(html_string)
+    create_nokogiri_object(html_string)
     { 
       name:         parse_advisor_name,
       business:     parse_business_name,

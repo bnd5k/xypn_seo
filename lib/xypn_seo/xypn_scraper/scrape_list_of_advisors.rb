@@ -12,13 +12,13 @@ class ScrapeListOfAdvisors
   private
 
   def self.scrape_profile_urls(html_string)
-    noko_doc = create_nokogiri_doc(html_string)
-    noko_doc.xpath('//h3/a/@href').map do |noko_element_advisor_url|
+    nokogiri_object = create_nokogiri_object(html_string)
+    nokogiri_object.xpath('//h3/a/@href').map do |noko_element_advisor_url|
       noko_element_advisor_url.value
     end
   end
 
-  def self.create_nokogiri_doc(html_string)
+  def self.create_nokogiri_object(html_string)
     clean_html = HTMLCleaner.clean(html_string)
     Nokogiri::HTML(clean_html)
   end
