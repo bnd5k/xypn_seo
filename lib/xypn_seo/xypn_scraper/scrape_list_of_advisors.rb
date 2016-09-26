@@ -1,5 +1,5 @@
 require 'nokogiri'
-require 'lib/xypn_seo/xypn_scraper/html_cleaner'
+require 'xypn_seo/xypn_scraper/html_cleaner'
 
 module XYPNSEO
   module XYPNScraper

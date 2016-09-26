@@ -1,5 +1,5 @@
 require 'nokogiri'
-require 'lib/xypn_seo/xypn_scraper/html_cleaner'
+require 'xypn_seo/xypn_scraper/html_cleaner'
 
 module XYPNSEO
   module XYPNScraper
@@ -37,6 +37,8 @@ module XYPNSEO
           @nokogiri_object.xpath('//p[@class="advisor-website"]/a/@href').first.value
         rescue Exception => e
           Rails.logger.error(e)
+          return "Business URL Not Found" 
+          # db placeholder, clean view rendering. Evaluation handles the API error.
         end
       end
       

@@ -12,13 +12,15 @@ module XYPNSEO
 
       def evaluate_all_websites
         Website.all.each do | website |
-          website.desktop_score = obtain_score(website.url, "desktop")
-          website.mobile_score = obtain_score(website.url, "mobile")
+          desktop_api_call = craft_api_call(website.url, "desktop")
+          mobile_api_call = craft_api_call(website.url, "mobile")
+          website.desktop_score = obtain_score(desktop_api_call)
+          website.mobile_score = obtain_score(mobile_api_call)
           website.save!
         end
       end
 
-      def obtain_score(site_url, strategy)
+      def obtain_score(api_url)
         begin
           api_response = RestClient.get(api_url)
           response_as_json = JSON.parse(api_response.body)
@@ -29,12 +31,10 @@ module XYPNSEO
         rescue RestClient::InternalServerError => e
           Rails.logger.error(e)
           return 0 
-        else
-
         end
       end
 
-      def api_url
+      def craft_api_call(site_url, strategy)
         "https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=#{site_url}&key=#{ENV['PAGESPEED_KEY']}&prettyprint=false&strategy=#{strategy}"
       end
 

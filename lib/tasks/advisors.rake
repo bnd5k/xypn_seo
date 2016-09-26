@@ -1,5 +1,5 @@
-require_relative "../xypn_seo/xypn_scraper/find_or_create_advisor_website"
-require_relative "../xypn_seo/seo_evaluation/advisor_site_evaluation"
+require "xypn_seo/xypn_scraper/find_or_create_advisor_website"
+require "xypn_seo/seo_evaluation/advisor_site_evaluation"
 
 namespace :advisors do
 
@@ -7,7 +7,7 @@ namespace :advisors do
   task scrape: :environment do
 
     puts "This will take a few minutes."
-    FindOrCreateAdvisorWebsite.new.call
+    XYPNSEO::XYPNScraper::FindOrCreateAdvisorWebsite.new.call
     puts "#{Website.all.count} advisor websites saved to the database."
 
   end
@@ -15,8 +15,8 @@ namespace :advisors do
   desc "Run PageSpeed Insights on advisor websites"
   task evaluate: :environment do
 
-    puts "This will take a few minutes."
-    AdvisorSiteEvaluation.new.call
+    puts "This will take upwards of 15 minutes."
+    XYPNSEO::SEOEvaluation::AdvisorSiteEvaluation.new.call
     puts "All websites have been evaluated."
 
   end

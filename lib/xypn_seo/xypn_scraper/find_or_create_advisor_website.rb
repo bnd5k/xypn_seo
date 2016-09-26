@@ -1,6 +1,6 @@
 require 'rest-client'
-require 'lib/xypn_seo/xypn_scraper/scrape_advisor_profile_page'
-require 'lib/xypn_seo/xypn_scraper/scrape_list_of_advisors'
+require 'xypn_seo/xypn_scraper/scrape_advisor_profile_page'
+require 'xypn_seo/xypn_scraper/scrape_list_of_advisors'
 
 module XYPNSEO
   module XYPNScraper
