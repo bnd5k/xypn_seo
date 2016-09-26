@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-sm-12 text-center">
+      <h1>XYPN Scraper</h1>
+    </div>
+
+  <end>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <table class="table table-striped table-condensed">
+        <tr>
+          <th>Advisor</th>
+          <th>Business</th>
+          <th>XYPN Profile</th>
+          <th>Website</th>
+          <th>
+            Desktop
+            <%= link_to "&#8593".html_safe, websites_path(sort: 'desktop_asc') %>
+            <%= link_to "&#8595".html_safe, websites_path(sort: 'desktop_desc') %>
+          </th>
+          <th>
+            Mobile
+            <%= link_to "&#8593".html_safe, websites_path(sort: 'mobile_asc') %>
+            <%= link_to "&#8595".html_safe, websites_path(sort: 'mobile_desc') %>
+          </th>
+        </tr>
+
+        <% @websites.each do | website | %>
+          <tr>
+            <td><%= website.advisor %></td>
+            <td><%= website.business %></td>
+            <td><%= link_to "Profile", website.xypn_profile, :target => '_blank' %></td>
+            <td><%= link_to "#{website.url}", website.url, :target => '_blank' %></td>
+            <td><%= website.desktop_score %></td>
+            <td><%= website.mobile_score %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    <end><!-- col-sm-12 -->
+  <end><!-- row -->
+<end><!-- container -->
