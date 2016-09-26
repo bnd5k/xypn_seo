@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'welcome#index'
+  root 'websites#index'
 
-  resource :welcome, only: :index
+  resources :websites, only: :index
   
 end

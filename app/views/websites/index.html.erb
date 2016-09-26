@@ -18,13 +18,13 @@
           <th>Website</th>
           <th>
             Desktop
-            <%= link_to "&#8593".html_safe, root_path(sort: 'desktop_asc') %>
-            <%= link_to "&#8595".html_safe, root_path(sort: 'desktop_desc') %>
+            <%= link_to "&#8593".html_safe, websites_path(sort: 'desktop_asc') %>
+            <%= link_to "&#8595".html_safe, websites_path(sort: 'desktop_desc') %>
           </th>
           <th>
             Mobile
-            <%= link_to "&#8593".html_safe, root_path(sort: 'mobile_asc') %>
-            <%= link_to "&#8595".html_safe, root_path(sort: 'mobile_desc') %>
+            <%= link_to "&#8593".html_safe, websites_path(sort: 'mobile_asc') %>
+            <%= link_to "&#8595".html_safe, websites_path(sort: 'mobile_desc') %>
           </th>
         </tr>
 

@@ -1,4 +1,4 @@
-class WelcomeController < ApplicationController
+class WebsitesController < ApplicationController
 
   def index
     case params['sort']
