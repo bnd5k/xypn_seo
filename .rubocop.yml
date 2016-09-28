@@ -1,0 +1,29 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - db/**/*
+    - bin/*
+    - 'spec/**/*'
+    - 'test/**/*'
+    - Gemfile
+    - Rakefile
+    - config/puma.rb
+    - config/initializers/*
+    - config/environments/*
+    - config/application.rb
+
+Rails:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 12
+
+Style/Documentation:
+  Enabled: false
+
+
+
