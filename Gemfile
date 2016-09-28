@@ -7,7 +7,6 @@ gem 'rails', '5.0.0.1'
 gem 'pg', '0.18.4'
 gem 'nokogiri', '1.6.8'
 gem 'rest-client'
-gem 'rubocop', require: false
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
@@ -48,6 +47,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rubocop', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

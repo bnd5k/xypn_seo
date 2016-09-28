@@ -33,9 +33,10 @@ module XYPNSEO
       end
 
       def craft_api_call(site_url, strategy)
-        'https://www.googleapis.com/pagespeedonline/v1/runPagespeed'\
-        "?url=#{site_url}&key=#{ENV['PAGESPEED_KEY']}&prettyprint="\
-        "false&strategy=#{strategy}"
+        base_url = 'https://www.googleapis.com/pagespeedonline/v1/runPagespeed'
+        params = "?url=#{site_url}&key=#{ENV['PAGESPEED_KEY']}"\
+          "&prettyprint=false&strategy=#{strategy}"
+        base_url + params
       end
     end
   end

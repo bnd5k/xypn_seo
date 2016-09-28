@@ -1,8 +1,6 @@
 class WebsitesController < ApplicationController
   def index
     @websites = case params['sort']
-                when 'mobile_asc'
-                  Website.mobile_asc
                 when 'mobile_desc'
                   Website.mobile_desc
                 when 'desktop_asc'
@@ -10,7 +8,7 @@ class WebsitesController < ApplicationController
                 when 'desktop_desc'
                   Website.desktop_desc
                 else
-                  Website.all
+                  Website.mobile_asc
                 end
   end
 end

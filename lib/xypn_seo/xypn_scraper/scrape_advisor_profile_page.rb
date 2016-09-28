@@ -36,8 +36,7 @@ module XYPNSEO
           '/a/@href').first.value
       rescue StandardError => e
         Rails.logger.error(e)
-        return 'Business URL Not Found'
-        # db placeholder, clean view rendering. No API error.
+        return
       end
     end
   end
