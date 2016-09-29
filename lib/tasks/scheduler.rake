@@ -6,6 +6,6 @@ namespace :advisors do
   task scrape_and_evaluate: :environment do
     XYPNSEO::XYPNScraper::FindOrCreateAdvisorWebsite.new.call
 
-    XYPNSEO::SEOEvaluation::AdvisorSiteEvaluation.new.call
+    # XYPNSEO::SEOEvaluation::AdvisorSiteEvaluation.new.call
   end
 end
