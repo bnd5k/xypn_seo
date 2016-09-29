@@ -1,18 +1,14 @@
 class WebsitesController < ApplicationController
-
   def index
-    case params['sort']
-    when 'mobile_asc'
-      @websites = Website.mobile_asc
-    when 'mobile_desc'
-      @websites = Website.mobile_desc
-    when 'desktop_asc'
-      @websites = Website.desktop_asc
-    when 'desktop_desc'
-      @websites = Website.desktop_desc
-    else
-      @websites = Website.all
-    end
+    @websites = case params['sort']
+                when 'mobile_desc'
+                  Website.mobile_desc
+                when 'desktop_asc'
+                  Website.desktop_asc
+                when 'desktop_desc'
+                  Website.desktop_desc
+                else
+                  Website.mobile_asc
+                end
   end
-
 end
