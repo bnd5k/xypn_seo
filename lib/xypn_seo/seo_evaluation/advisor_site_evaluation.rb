@@ -38,9 +38,10 @@ module XYPNSEO
           prettyprint: false,
           strategy: strategy
         }
-        URI::HTTP.build(host: 'www.googleapis.com',
-                        path: '/pagespeedonline/v1/runPagespeed',
-                        query: params.to_query)
+        uri_object = URI::HTTPS.build(host: 'www.googleapis.com',
+                                      path: '/pagespeedonline/v1/runPagespeed',
+                                      query: params.to_query)
+        uri_object.to_s
       end
     end
   end
