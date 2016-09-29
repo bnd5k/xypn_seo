@@ -25,18 +25,22 @@ module XYPNSEO
         response_as_json['score']
       rescue RestClient::BadRequest => e
         Rails.logger.error(e)
-        return 0
-        # Website score columns placeholder, needed for scope querying
+        return 0 # Website score columns placeholder needed for scope querying
       rescue RestClient::InternalServerError => e
         Rails.logger.error(e)
         return 0
       end
 
       def craft_api_call(site_url, strategy)
-        base_url = 'https://www.googleapis.com/pagespeedonline/v1/runPagespeed'
-        params = "?url=#{site_url}&key=#{ENV['PAGESPEED_KEY']}"\
-          "&prettyprint=false&strategy=#{strategy}"
-        base_url + params
+        params = {
+          url: site_url,
+          key: ENV['PAGESPEED_KEY'],
+          prettyprint: false,
+          strategy: strategy
+        }
+        URI::HTTP.build(host: 'www.googleapis.com',
+                        path: '/pagespeedonline/v1/runPagespeed',
+                        query: params.to_query)
       end
     end
   end
