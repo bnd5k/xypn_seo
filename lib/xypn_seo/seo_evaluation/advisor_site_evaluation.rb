@@ -23,12 +23,9 @@ module XYPNSEO
         api_response = RestClient.get(api_url)
         response_as_json = JSON.parse(api_response.body)
         response_as_json['score']
-      rescue RestClient::BadRequest => e
-        Rails.logger.error(e)
+      rescue RestClient::Exception => e
+        Rails.logger.error("Failed Request with error code #{e.http_code}. Response: #{e.response}")
         return 0 # Website score columns placeholder needed for scope querying
-      rescue RestClient::InternalServerError => e
-        Rails.logger.error(e)
-        return 0
       end
 
       def craft_api_call(site_url, strategy)
