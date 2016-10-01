@@ -24,8 +24,7 @@ module XYPNSEO
         response_as_json = JSON.parse(api_response.body)
         response_as_json['score']
       rescue RestClient::Exception => e
-        Rails.logger.error(e.http_code)
-        Rails.logger.error(e.response)
+        Rails.logger.error("Failed Request with error code #{e.http_code}. Response: #{e.response}")
         return 0 # Website score columns placeholder needed for scope querying
       end
 
