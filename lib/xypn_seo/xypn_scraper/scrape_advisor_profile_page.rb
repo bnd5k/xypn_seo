@@ -32,8 +32,7 @@ module XYPNSEO
       end
 
       def parse_business_site
-        @nokogiri_object.xpath('//p[@class="advisor-website"]'\
-          '/a/@href').first.value
+        @nokogiri_object.xpath('//ul//li//a[@target="_blank"]').first.text
       rescue NoMethodError => e # xpath value is nil if no website exists
         Rails.logger.error(e)
         return # returns nil, DB is unaffected
