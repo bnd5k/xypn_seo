@@ -8,7 +8,7 @@ class WebsitesController < ApplicationController
                 when 'desktop_desc'
                   Website.desktop_desc
                 else
-                  Website.mobile_asc
+                  Website.mobile_desc
                 end
   end
 end
